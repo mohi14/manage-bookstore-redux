@@ -1,4 +1,4 @@
-import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS, FILTER_BOOKS, SEARCH_BOOKS } from "./actionTypes"
+import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS, SEARCH_BOOKS } from "./actionTypes"
 
 
 export const addBooks = (value) => {
@@ -32,9 +32,3 @@ export const searchBooks = (texts) => {
     }
 }
 
-export const filterBooks = (status) => {
-    return {
-        type: FILTER_BOOKS,
-        payload: status
-    }
-}

@@ -1,4 +1,4 @@
-import { ADD_BOOKS } from "./actionTypes";
+import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS, FILTER_BOOKS } from "./actionTypes";
 
 const initialState = []
 
@@ -12,6 +12,21 @@ const addBooksReducer = (state = initialState, action) => {
         case ADD_BOOKS:
             const addedState = [...state, { ...action.payload, id: nextBookId(state) }]
             return addedState
+
+        case DELETE_BOOKS:
+            const NotDeletedBooks = state.filter(book => book.id !== action.payload)
+            return NotDeletedBooks
+
+        case EDIT_BOOKS:
+            const editedBooks = state.map(book => {
+                if (book.id === action.payload.id) {
+                    return { ...book, name: action.payload.value.name, author: action.payload.value.author, thumbnail: action.payload.value.thumbnail, price: action.payload.value.price, rating: action.payload.value.rating, featured: action.payload.value.featured }
+                }
+                else {
+                    return book
+                }
+            })
+            return editedBooks
 
         default:
             return state
