@@ -1,4 +1,4 @@
-import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS, FILTER_BOOKS } from "./actionTypes";
+import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS, FILTER_BOOKS, LOADED_BOOKS } from "./actionTypes";
 
 const initialState = []
 
@@ -9,6 +9,8 @@ const nextBookId = (bookId) => {
 
 const addBooksReducer = (state = initialState, action) => {
     switch (action.type) {
+        case LOADED_BOOKS:
+            return action.payload
         case ADD_BOOKS:
             const addedState = [...state, { ...action.payload, id: nextBookId(state) }]
             return addedState

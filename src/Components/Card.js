@@ -1,16 +1,17 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { deleteBooks, editBooks } from '../redux/addBooks/action';
+import deletedBooks from '../redux/addBooks/thunk/deletedBooks';
 
 const Card = ({ book, setEditedItem }) => {
     const dispatch = useDispatch()
     const handleDelete = (id) => {
-        dispatch(deleteBooks(id))
+        dispatch(deletedBooks(id))
     }
 
-    const handleEdit = (id, value) => {
-        dispatch(editBooks(id, value))
-    }
+    // const handleEdit = (id, value) => {
+    //     dispatch(editBooks(id, value))
+    // }
     return (
         <div className="book-card">
             <img className="h-[240px] w-[170px] object-cover lws-bookThumbnail"

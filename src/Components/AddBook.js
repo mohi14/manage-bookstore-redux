@@ -1,6 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addBooks, editBooks } from '../redux/addBooks/action';
+import addedBooks from '../redux/addBooks/thunk/addedBooks';
+import editedBooks from '../redux/addBooks/thunk/editedBooks';
 
 const AddBook = ({ editedItem, setEditedItem }) => {
     const dispatch = useDispatch()
@@ -22,7 +24,7 @@ const AddBook = ({ editedItem, setEditedItem }) => {
             rating,
             featured
         }
-        dispatch(addBooks(data))
+        dispatch(addedBooks(data))
         form.reset()
     }
 
@@ -44,7 +46,7 @@ const AddBook = ({ editedItem, setEditedItem }) => {
             rating,
             featured
         }
-        dispatch(editBooks(editedItem.id, data))
+        dispatch(editedBooks(editedItem.id, data))
         form.reset()
         setEditedItem(null)
 
@@ -84,7 +86,7 @@ const AddBook = ({ editedItem, setEditedItem }) => {
                         </div>
 
                         <div className="flex items-center">
-                            <input id="input-Bookfeatured" type="checkbox" name="featured" className="w-4 h-4" defaultChecked={editedItem.featured} />
+                            <input id="input-Bookfeatured" type="checkbox" name="featured" className="w-4 h-4" defaultChecked={editedItem.featured === true ? true : false} />
                             <label for="featured" className="ml-2 text-sm"> This is a featured book </label>
                         </div>
 
@@ -120,7 +122,7 @@ const AddBook = ({ editedItem, setEditedItem }) => {
                         </div>
 
                         <div className="flex items-center">
-                            <input id="input-Bookfeatured" type="checkbox" name="featured" className="w-4 h-4" defaultChecked={false} />
+                            {!editedItem && <input id="input-Bookfeatured" type="checkbox" name="featured" className="w-4 h-4" />}
                             <label for="featured" className="ml-2 text-sm"> This is a featured book </label>
                         </div>
 

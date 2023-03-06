@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import AddBook from '../Components/AddBook';
 import Card from '../Components/Card';
 import { filterBooks } from '../redux/addBooks/action';
+import fetchBooks from '../redux/addBooks/thunk/fetchBooks';
 import { featuredFilter } from '../redux/fillter/action';
 
 const Home = () => {
@@ -40,6 +41,8 @@ const Home = () => {
             return true
         }
     }
+
+    useState(() => { dispatch(fetchBooks) }, [dispatch])
 
     const [editedItem, setEditedItem] = useState(null)
     return (

@@ -1,4 +1,4 @@
-import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS } from "./actionTypes"
+import { ADD_BOOKS, DELETE_BOOKS, EDIT_BOOKS, LOADED_BOOKS } from "./actionTypes"
 
 
 export const addBooks = (value) => {
@@ -22,6 +22,13 @@ export const deleteBooks = (id) => {
     return {
         type: DELETE_BOOKS,
         payload: id
+    }
+}
+
+export const loadedBooks = (value) => {
+    return {
+        type: LOADED_BOOKS,
+        payload: value
     }
 }
 
