@@ -15,15 +15,29 @@ const Home = () => {
     }
 
 
+
     const handleFeatured = (book) => {
         const { status } = filter;
         switch (status) {
             case true:
                 return book.featured;
-            case false:
+            case "ALL":
                 return true
             default:
                 return true;
+        }
+    }
+
+    const handleSearch = (book) => {
+        const { searchText } = filter;
+        if (searchText) {
+            // const searchValue = searchText.toLowerCase()
+            // const bookName = book.name.toLowerCase()
+            // return searchValue && bookName.startsWith(searchValue)
+            return book.name.toLowerCase().includes(searchText.toLowerCase())
+        }
+        else {
+            return true
         }
     }
 
@@ -36,12 +50,12 @@ const Home = () => {
                         <h4 className="mt-2 text-xl font-bold">Book List</h4>
 
                         <div className="flex items-center space-x-4">
-                            <button className="filter-btn active-filter" id="lws-filterAll" onClick={() => handleStatusChanged(false)}>All</button>
-                            <button className="filter-btn" id="lws-filterFeatured" onClick={() => handleStatusChanged(true)}>Featured</button>
+                            <button className={`filter-btn ${filter.status === "ALL" && "active-filter"}`} id="lws-filterAll" onClick={() => handleStatusChanged("ALL")}>All</button>
+                            <button className={`filter-btn ${filter.status === true && "active-filter"}`} id="lws-filterFeatured" onClick={() => handleStatusChanged(true)}>Featured</button>
                         </div>
                     </div>
                     <div className="lws-bookContainer">
-                        {allBooks && allBooks.filter(handleFeatured).map(book => <Card key={book.id} book={book} setEditedItem={setEditedItem}></Card>)}
+                        {allBooks && allBooks.filter(handleFeatured).filter(handleSearch).map(book => <Card key={book.id} book={book} setEditedItem={setEditedItem}></Card>)}
                     </div>
                 </div>
                 <div>

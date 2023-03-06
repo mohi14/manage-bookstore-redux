@@ -1,7 +1,14 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import logo from '../images/logo.svg'
+import { searchFilter } from '../redux/fillter/action';
 
 const NavBar = () => {
+    const dispatch = useDispatch()
+    const handleChange = (e) => {
+        const searchText = e.target.value;
+        dispatch(searchFilter(searchText))
+    }
     return (
         <nav className="py-4 2xl:px-6">
             <div className="container flex items-center justify-between">
@@ -21,7 +28,7 @@ const NavBar = () => {
                                 d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z">
                             </path>
                         </svg>
-                        <input type="text" placeholder="Filter books..." className="search" id="lws-searchBook" />
+                        <input type="text" placeholder="Filter books..." className="search" id="lws-searchBook" onChange={handleChange} />
                     </div>
                 </form>
             </div>
